@@ -1,6 +1,7 @@
 import DOMPurify  from 'dompurify'
 import { Trophy, Ban } from 'lucide-react';
 // import parse from 'html-react-parser'
+import { useRef, useState, useLayoutEffect } from 'react';
 
 enum Status {
     Win = "WIN",
@@ -27,6 +28,30 @@ const Review = ({innerhtml, liked, rating, title, poster, result, movie, handleM
     const targetElement = doc.querySelector('.js-review-body');
     const reviewer = doc.querySelector('.name');
     const likes = doc.querySelector('.cannot-like');
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null); 
+
+    const [applyCentering, setApplyCentering] = useState(false); 
+ 
+    const cleanHtml = DOMPurify.sanitize(targetElement?.innerHTML || '');
+
+    useLayoutEffect(() => {
+        let shouldCenter = false;
+        if (scrollContainerRef.current && contentRef.current) {
+          const containerHeight = scrollContainerRef.current.clientHeight;
+          const contentHeight = contentRef.current.scrollHeight;     
+    
+          if (contentHeight <= containerHeight) {
+            shouldCenter = true;
+          }
+        }
+        setApplyCentering(shouldCenter);
+    
+        if (!shouldCenter && scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop = 0;
+        }
+    
+    }, [cleanHtml]);
 
     const renderRevealCard = () => (
         <div className='mx-auto w-5/8 flex gap-4'>
@@ -60,21 +85,25 @@ const Review = ({innerhtml, liked, rating, title, poster, result, movie, handleM
             </div>
         </div>
     );
- 
-    const cleanHtml = DOMPurify.sanitize(targetElement?.innerHTML || '');
 
     return (
         <>
             {!title ?
-                <div className=" mx-auto p-4 w-1/2 rounded-2xl shadow-md m-2 transition-all duration-500 ease-in-out transform hover:scale-[1.02]" style={{'backgroundColor': '#14181C', 'color':'#99AABB'}}>
+                <div className="mx-auto p-4 w-1/2 rounded-2xl shadow-md m-2 transition-all duration-500 ease-in-out transform hover:scale-[1.02]" style={{'backgroundColor': '#14181C', 'color':'#99AABB'}}>
 
                     <div className='mx-auto w-9/10 flex'>
                         <div className='pr-3 text-green-500'>{rating}</div>
                         <div className='pr-3 text-orange-400' >{liked ? '♥' : ''}</div>
                         <div className='w-full'>Watched by {reviewer?.innerHTML}</div>
                     </div>
-                    <div className='mx-auto w-9/10 flex-1 min-h-60 max-h-60 flex items-center'>
-                        <div dangerouslySetInnerHTML={{__html: cleanHtml}} />   
+                    <div 
+                        ref={scrollContainerRef} 
+                        className={`
+                            mx-auto w-9/10 flex-1 min-h-60 max-h-60 overflow-y-auto overflow-x-hidden
+                            ${applyCentering ? 'flex items-center' : ''}
+                          `}
+                        >
+                        <div ref={contentRef} dangerouslySetInnerHTML={{__html: cleanHtml}} />   
                     </div>
                     <div className='mx-auto w-9/10 flex'>
                         <div>

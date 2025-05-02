@@ -23,7 +23,7 @@ type ReviewCarouselProps = {
     handleModalOpen: any
 }
 
-const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange, suggestions, isMovieSuggestionLoading, movie, title, poster, handleModalOpen}) => {
+const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange, suggestions, movie, title, poster, handleModalOpen}) => {
 
     const buttonColors = [
         'bg-black',
@@ -35,7 +35,7 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
     
     const gameSlate = [...slides, {title, poster}];
     // console.log(gameSlate);
-    const [guess, setGuess] = useState(0);
+    const [_, setGuess] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const [currentIndex, setCurrentIndex] = useStickyState(-1, 'currentIndex');

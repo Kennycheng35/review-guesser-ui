@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import './App.css'
 import { useMovie, useMovieSuggestions } from './hooks/useMovie'
@@ -9,6 +9,7 @@ import { resetLocalStorage } from './util/resetLocalStorage'
 import Stats from './components/Stats'
 import HowToPlay from './components/HowToPlay'
 import { DateTime } from 'luxon';
+import { Loader } from 'lucide-react';
 
 type Review = {
   id: number;
@@ -35,13 +36,15 @@ function App() {
     setModalOpen(true);
   }
 
-  if (isMovieLoading || !movie) return <p>Loading...</p>;
-
   return (
     <>
       <div className="min-h-screen flex flex-col">
         <HeaderBar handleModalOpen={handleModalOpen}/>
-        <ReviewCarousel 
+        {(isMovieLoading || !movie) ? 
+        <div className='animate-pulse mx-auto py-40 animate-spin'>
+          <Loader size={64}/>
+        </div>
+        : <ReviewCarousel 
           slides={movie.reviews.sort((a: Review, b: Review) => a.difficulty < b.difficulty)} 
           value={query} 
           onChange={setQuery}
@@ -51,7 +54,7 @@ function App() {
           title={movie.title}
           poster={movie.poster}
           handleModalOpen={handleModalOpen}
-          />
+          />}
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         {modalContent === 'stats' ?<Stats /> : <HowToPlay />}
