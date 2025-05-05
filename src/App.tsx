@@ -45,14 +45,14 @@ function App() {
           <Loader size={64}/>
         </div>
         : <ReviewCarousel 
-          slides={movie.reviews.sort((a: Review, b: Review) => a.difficulty < b.difficulty)} 
+          slides={(movie?.reviews ?? []).sort((a: Review, b: Review) => a.difficulty < b.difficulty)} 
           value={query} 
           onChange={setQuery}
           suggestions={suggestions}
           isMovieSuggestionLoading={isMovieSuggestionLoading}
-          movie={movie.link}
-          title={movie.title}
-          poster={movie.poster}
+          movie={movie?.link}
+          title={movie?.title}
+          poster={movie?.poster}
           handleModalOpen={handleModalOpen}
           />}
       </div>
