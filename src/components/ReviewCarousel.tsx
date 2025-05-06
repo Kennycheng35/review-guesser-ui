@@ -37,6 +37,7 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
     // console.log(gameSlate);
     const [_, setGuess] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
+    const isInitialMountForResultEffect = useRef(true);
 
     const [currentIndex, setCurrentIndex] = useStickyState(-1, 'currentIndex');
     const [visibleButtons, setVisibleButtons] = useStickyState(1, 'visibleButtons');
@@ -84,6 +85,11 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
     },[currentIndex])
 
     useEffect(() => {
+        if (isInitialMountForResultEffect.current) {
+            isInitialMountForResultEffect.current = false;
+            return;
+        }
+
        if (visibleButtons === 5){
             // console.log('lc',lastCompleted, DateTime.now().toISODate());
             if (lastCompleted && lastCompleted !== DateTime.now().toISODate() || lastCompleted === null) {
@@ -109,29 +115,6 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
                     updateStats('currentStreak', stats.currentStreak + 1);
                 }
             }
-            // else if (lastCompleted === null){
-            //     setLastCompleted(DateTime.now().toISODate());
-            //     updateStats('gamesPlayed', stats.gamesPlayed + 1);
-            //     const numberOfTries = [...stats.distribution]
-            //     if (winScore === 0)
-            //         numberOfTries[numberOfTries.length - 1]++;
-            //     else 
-            //         numberOfTries[winScore - 1]++;
-            //     console.log('number of tries', numberOfTries);
-
-            //     updateStats('distribution', numberOfTries)
-            //     const sum = numberOfTries.reduce((acc, curr) => acc + curr, 0);
-            //     const last = numberOfTries[numberOfTries.length - 1];
-            //     updateStats('winPercent', Math.floor(last/sum * 100));
-
-            //     if (result === Status.Loss) {
-            //         updateStats('currentStreak', 0);
-            //     }
-            //     else {
-            //         updateStats('currentStreak', stats.currentStreak + 1);
-            //         // updateStats('maxStreak', Math.max(stats.currentStreak, stats.maxStreak));
-            //     }
-            // }
             
         }
     }, [result])
@@ -182,7 +165,6 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
         //     </div>
         // </div>
         <div className="relative w-full max-w-9/10 mx-auto mt-10">
-            {/* Carousel Items */}
             <div className="overflow-hidden rounded-lg">
             <div
                 className="flex transition-transform duration-300 ease-in-out"
@@ -208,21 +190,16 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
                 >
                     { index + 1 === 5 ? 
                         <img 
-                        className='relative bottom-[3px]' 
+                        className='relative bottom-[3px] w-5 sm:w-5' 
                         src={logo} alt="Logo" 
-                        style={{width:'20px'}}
                         />
                         : index + 1
                     }
                 </button>
                 ))}
             </div>
-            {/* {visibleButtons < totalSlides && <button onClick={showMoreButtons}>
-                +
-            </button>} */}
             <div className='items-center flex justify-center pt-3'>
-                <div className='relative w-2/5 flex justify-center' ref={containerRef}>
-                    <input 
+                    <div className='relative w-full md:w-3/5 2xl:w-3/8 flex justify-center' ref={containerRef}>                    <input 
                         type='text'
                         placeholder='Enter a movie'
                         className='bg-white text-black w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500'

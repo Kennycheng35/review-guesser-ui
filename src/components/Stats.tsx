@@ -11,7 +11,7 @@ const Stats = () => {
     }
 
     return (
-        <div className="hidden md:block w-full h-full flex flex-col overflow-y-auto p-4"> 
+        <div className="max-h-[90vh] w-full h-full flex flex-col overflow-y-auto p-4"> 
           <h2 className='text-black flex items-center justify-center text-3xl mb-4'>Stats</h2> 
 
           <div className='flex text-black'>
