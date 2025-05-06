@@ -54,7 +54,7 @@ const Review = ({innerhtml, liked, rating, title, poster, result, movie, handleM
     }, [cleanHtml]);
 
     const renderRevealCard = () => (
-        <div className='mx-auto w-5/8 flex gap-4'>
+        <div className='mx-auto w-5/8 flex gap-4 lg:gap-1'>
             <div className='flex justify-center items-center flex-1 transition-all duration-500 ease-in-out transform hover:scale-[1.02]'>
                 <img  className="h-82 w-auto rounded-lg" src={poster}/>
             </div>
