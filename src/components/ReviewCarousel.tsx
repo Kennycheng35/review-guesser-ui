@@ -186,7 +186,7 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
                     className={
                         `carousel-nav-button 
                         ${currentIndex === index ? `${dynamicButtonColors[index]} text-white scale-125` : 'bg-white text-black'}
-                        p-2 mx-2 cursor-pointer rounded-full transition duration-300 ease-in-out`}
+                        p-2 mx-1 sm:mx-2 cursor-pointer rounded-full transition duration-300 ease-in-out`}
                 >
                     { index + 1 === 5 ? 
                         <img 
