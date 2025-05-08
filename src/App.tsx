@@ -11,14 +11,14 @@ import HowToPlay from './components/HowToPlay'
 import { DateTime } from 'luxon';
 import { Loader } from 'lucide-react';
 
-type Review = {
-  id: number;
-  review: string;
-  difficulty: number;
-  innerhtml: string;
-  liked: boolean;
-  rating: string;
-}
+// type Review = {
+//   id: number;
+//   review: string;
+//   difficulty: number;
+//   innerhtml: string;
+//   liked: boolean;
+//   rating: string;
+// }
 
 function App() {
   const { data: movie, isLoading: isMovieLoading } = useMovie(DateTime.now().toISODate());
