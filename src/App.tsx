@@ -45,7 +45,8 @@ function App() {
           <Loader size={64}/>
         </div>
         : <ReviewCarousel 
-          slides={(movie?.reviews ?? []).sort((a: Review, b: Review) => a.id < b.id)} 
+          // slides={(movie?.reviews ?? []).sort((a: Review, b: Review) => a.id < b.id)} 
+          slides={movie?.reviews ?? []} 
           value={query} 
           onChange={setQuery}
           suggestions={suggestions}
