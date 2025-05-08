@@ -26,7 +26,7 @@ function App() {
   // console.log('this is movie', movie);
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
-
+  console.log(movie);
   useEffect(() => {
     resetLocalStorage(['currentIndex','result','visibleButtons', 'winScore']);
   },[]);
@@ -45,7 +45,7 @@ function App() {
           <Loader size={64}/>
         </div>
         : <ReviewCarousel 
-          slides={(movie?.reviews ?? []).sort((a: Review, b: Review) => a.difficulty < b.difficulty)} 
+          slides={(movie?.reviews ?? []).sort((a: Review, b: Review) => a.id < b.id)} 
           value={query} 
           onChange={setQuery}
           suggestions={suggestions}
