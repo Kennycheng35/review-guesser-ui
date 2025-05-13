@@ -4,6 +4,7 @@ import { useStickyState } from '../hooks/useStickyState';
 import logo from '../assets/reviewbombd.svg';
 import { useGameStats } from '../hooks/useGameStats';
 import { DateTime } from 'luxon';
+import ReactGA from 'react-ga4';
 
 enum Status {
     Win = "WIN",
@@ -114,6 +115,12 @@ const ReviewCarousel:React.FC<ReviewCarouselProps>  = ( {slides, value, onChange
                 else {
                     updateStats('currentStreak', stats.currentStreak + 1);
                 }
+
+                ReactGA.gtag('event', 'completed_game', {
+                    movie_title: title,
+                    win_score: winScore,
+                    result: result
+                })
             }
             
         }

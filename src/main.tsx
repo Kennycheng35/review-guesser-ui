@@ -9,7 +9,6 @@ const queryClient = new QueryClient();
 const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 if (gaMeasurementId) {
   ReactGA.initialize(gaMeasurementId);
-  console.log("GA4 Initialized");
 }
 
 createRoot(document.getElementById('root')!).render(

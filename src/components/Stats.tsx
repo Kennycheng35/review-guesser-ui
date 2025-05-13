@@ -4,7 +4,6 @@ import { useGameStats } from "../hooks/useGameStats";
 
 const Stats = () => {
     const { stats, } = useGameStats();
-    console.log('stats', stats);
 
     if (!stats) {
         return null; 

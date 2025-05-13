@@ -23,10 +23,8 @@ import { Loader } from 'lucide-react';
 function App() {
   const { data: movie, isLoading: isMovieLoading } = useMovie(DateTime.now().toISODate());
   const { query, setQuery, suggestions, isLoading: isMovieSuggestionLoading } = useMovieSuggestions();
-  // console.log('this is movie', movie);
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
-  console.log(movie);
   useEffect(() => {
     resetLocalStorage(['currentIndex','result','visibleButtons', 'winScore']);
   },[]);
