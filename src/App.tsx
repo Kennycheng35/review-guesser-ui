@@ -10,6 +10,7 @@ import Stats from './components/Stats'
 import HowToPlay from './components/HowToPlay'
 import { DateTime } from 'luxon';
 import { Loader } from 'lucide-react';
+import { useStickyState } from './hooks/useStickyState'
 
 // type Review = {
 //   id: number;
@@ -28,6 +29,16 @@ function App() {
   useEffect(() => {
     resetLocalStorage(['currentIndex','result','visibleButtons', 'winScore']);
   },[]);
+
+  const [hasVisitedBefore, setHasVisitedBefore] = useStickyState('false','hasVisitedBefore');
+
+  useEffect(() => {
+    if (hasVisitedBefore === 'false'){
+      setModalContent('how-to');
+      setModalOpen(true);
+    }
+    setHasVisitedBefore('true')
+  },[])
 
   const handleModalOpen = (content: string | null) =>{
     setModalContent(content);

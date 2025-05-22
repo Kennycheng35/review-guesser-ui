@@ -1,0 +1,33 @@
+const array = [ 1, 2, 3, 2, 1, 1, 4]
+
+const findKTimesValue = (array, k) => {
+    const elementCount= {}
+    const elementSet = new Set()
+    for (let x=0;x <= array.length;x++){
+        if (!elementCount[array[x]] {
+            elementCount[array[x]] = 0
+        }
+        elementCount[array[x]] = elementCount[array[x]] + 1;
+        elementSet.push(array[x])
+    }
+    for (let)
+
+
+}
+
+findKTimesValue(array, 2);
+
+
+5 heads, 5 tails
+shuffle coins
+5 coins to one person, 5 to another
+
+
+
+3 heads 2 tails
+
+ x x x x X
+
+ 2 heads and 3 tails
+
+

@@ -7,10 +7,9 @@ const HowToPlay = () => {
           <div className='text-black pt-5'>
             <p className="pb-3">Guess the movie from the Letterboxd Reviews!</p>
             <p className="pb-3">4 reviews are randomly selected for a movie.</p>
-            <p className="pb-3">You are given 1 review and have to guess the movie based on that review.</p>
+            <p className="pb-3">You are given 1 review at a time and have to guess the movie based on that review.</p>
             <p className="pb-3">You have 4 reviews and 4 chances to guess the movie.</p>
             <p className="pb-3">Good luck!</p>
-
           </div>
         </div>
     )
